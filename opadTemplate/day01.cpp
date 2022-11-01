@@ -279,9 +279,9 @@ void bfs(std::vector<std::vector<mazeCell>>* maze,int startposx,int startposy,in
     }
 }
 
-void day01usage()
+void day01usage(char** argv)
 {
-    std::wcout << "Usage:" << std::endl << "day01 [easy|hard]" << std::endl;
+    std::wcout << "Usage:" << std::endl << argv[0] << " [easy | normal | hard]" << std::endl;
 }
 
 void day01(int argc,char** argv)
@@ -290,7 +290,7 @@ void day01(int argc,char** argv)
 
     if (argc > 2)
     {
-        day01usage();
+        day01usage(argv);
         return;
     }
 
@@ -319,7 +319,7 @@ void day01(int argc,char** argv)
         }
         else
         {
-            day01usage();
+            day01usage(argv);
             return;
         }
     }
