@@ -15,7 +15,8 @@ int main(int argc,char** argv)
 
     clearScreen();
 
-    day01(argc,argv);
+    //day01(argc,argv);
+    day02();
 
 	return 0;
 }

@@ -10,8 +10,8 @@ using json = nlohmann::json;
 #pragma comment(lib, "wbemuuid.lib")
 #include <WinUser.h>
 
-#define CPPHTTPLIB_OPENSSL_SUPPORT
-#include "httplib.h"
+//#define CPPHTTPLIB_OPENSSL_SUPPORT
+//#include "httplib.h"
 
 #include <iostream>
 #include <chrono>
@@ -29,5 +29,6 @@ void consoleGotoxy(int x, int y);
 void clearScreen();
 
 void day01(int argc, char** argv);
+void day02();
 
 #endif
