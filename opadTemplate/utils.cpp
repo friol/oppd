@@ -37,3 +37,33 @@ void setUnicodeConsole()
     // seems it's the only way in windows to print unicode chars in the console
     int err = _setmode(_fileno(stdout), _O_U16TEXT);
 }
+
+void consolePrintReversedChar(char ch,int col)
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (col==0) SetConsoleTextAttribute(hConsole, BACKGROUND_GREEN);
+    if (col==1) SetConsoleTextAttribute(hConsole, BACKGROUND_RED);
+    std::cout << ch;
+}
+
+void resetConsole()
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, 7);
+}
+
+COORD GetConsoleCursorPosition()
+{
+    CONSOLE_SCREEN_BUFFER_INFO cbsi;
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (GetConsoleScreenBufferInfo(hConsoleOutput, &cbsi))
+    {
+        return cbsi.dwCursorPosition;
+    }
+    else
+    {
+        // The function failed. Call GetLastError() for details.
+        COORD invalid = { 0, 0 };
+        return invalid;
+    }
+}

@@ -14,9 +14,12 @@ using json = nlohmann::json;
 #include "httplib.h"
 
 #include <iostream>
+#include <fstream>
 #include <chrono>
 #include <thread>
 #include <future>
+#include <cctype>
+#include <locale>
 
 #include <conio.h>
 #include <fcntl.h>
@@ -28,6 +31,9 @@ using json = nlohmann::json;
 void consoleGotoxy(int x, int y);
 void clearScreen();
 void setUnicodeConsole();
+void consolePrintReversedChar(char ch,int col);
+void resetConsole();
+COORD GetConsoleCursorPosition();
 
 void day01(int argc, char** argv);
 void day02();
