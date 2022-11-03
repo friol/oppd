@@ -10,13 +10,11 @@
 
 int main(int argc,char** argv)
 {
-    // seems it's the only way in windows to print unicode chars in the console
-    int err=_setmode(_fileno(stdout), _O_U16TEXT);
-
     clearScreen();
 
     //day01(argc,argv);
-    day02();
+    //day02();
+    day03();
 
 	return 0;
 }

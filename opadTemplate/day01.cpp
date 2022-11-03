@@ -288,6 +288,8 @@ void day01(int argc,char** argv)
 {
     std::vector<std::vector<mazeCell>> maze;
 
+    setUnicodeConsole();
+
     if (argc > 2)
     {
         day01usage(argv);

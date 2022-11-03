@@ -163,6 +163,8 @@ void renderMaze3D(int camXpos, int camZpos, int camdir, std::vector<std::vector<
 
 void day02()
 {
+    setUnicodeConsole();
+
     // maze generation
     int mazeDimX = 65;
     int mazeDimY = 23;

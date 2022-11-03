@@ -32,3 +32,8 @@ void clearScreen()
     consoleGotoxy(0, 0);
 }
 
+void setUnicodeConsole()
+{
+    // seems it's the only way in windows to print unicode chars in the console
+    int err = _setmode(_fileno(stdout), _O_U16TEXT);
+}
