@@ -10,6 +10,14 @@ void consoleGotoxy(int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
+void consoleGetDimensions(int& dimx, int& dimy)
+{
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    dimx = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    dimy = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+}
+
 void clearScreen()
 {
     CONSOLE_SCREEN_BUFFER_INFO csbi;

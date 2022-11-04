@@ -34,9 +34,11 @@ void setUnicodeConsole();
 void consolePrintReversedChar(char ch,int col);
 void resetConsole();
 COORD GetConsoleCursorPosition();
+void consoleGetDimensions(int& dimx, int& dimy);
 
 void day01(int argc, char** argv);
 void day02();
 void day03();
+void day04(int argc, char** argv);
 
 #endif

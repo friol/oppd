@@ -14,7 +14,8 @@ int main(int argc,char** argv)
 
     //day01(argc,argv);
     //day02();
-    day03();
+    //day03();
+    day04(argc, argv);
 
 	return 0;
 }
