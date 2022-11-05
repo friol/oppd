@@ -49,7 +49,6 @@ public:
 		}
 	}
 
-	// 0 all ok, 1 hit a fruit, 2 hit a wall
 	int snizzle(int board[][80],int&hpx,int&hpy)
 	{
 		std::vector<int> newEl = { this->body[0][0],this->body[0][1] };
@@ -70,9 +69,20 @@ public:
 		hpy = newEl[1];
 
 		int val = board[newEl[1]][newEl[0]];
+
+		// 0 all ok, 1 hit a fruit, 2 hit a wall
+		
+		// check if we hit ourselves
+		for (int p = 1;p < this->body.size();p++)
+		{
+			if ((newEl[0] == this->body[p][0]) && (newEl[1] == this->body[p][1])) return 2;
+		}
+
 		if (val == 0) return 0;
 		if (val == 1) return 2;
 		if (val == 2) return 1;
+
+		return 0;
 	}
 
 	void newdir(int dir)
@@ -141,7 +151,35 @@ void newRandomFruit(int board[][80], int dimx, int dimy)
 void printStatusBar(int s)
 {
 	consoleGotoxy(0, 0);
-	std::wcout << " OPPD Snake                                                       Score: " << s << " ";
+	std::wcout << L"╔══════════════════════════════════════════════════════════════════════════════╗" << std::endl;
+	std::wcout << L"║ OPPD Snake                                                         Score: " << std::setw(3) << s << L"║" << std::endl;
+	std::wcout << L"╚══════════════════════════════════════════════════════════════════════════════╝" << std::endl;
+}
+
+int day05readBestScore()
+{
+	std::ifstream scoreFile;
+	scoreFile.open("day05score.txt", std::ios::in);
+
+	if (scoreFile.is_open())
+	{
+		std::string curscore;
+		std::getline(scoreFile, curscore);
+		return stoi(curscore);
+	}
+
+	return 0;
+}
+
+void day05writeNewScore(int newscore)
+{
+	std::ofstream scoreFile;
+	scoreFile.open("day05score.txt", std::ios::out);
+	if (scoreFile.is_open())
+	{
+		std::string snewscore = std::to_string(newscore);
+		scoreFile << snewscore;
+	}
 }
 
 void day05()
@@ -165,6 +203,7 @@ void day05()
 
 	setUnicodeConsole();
 	clearScreen();
+	consoleHideCursor();
 
 	wchar_t framebuffer[boardDimY][boardDimX];
 	for (int r = 0;r < boardDimY;r++)
@@ -177,6 +216,8 @@ void day05()
 
 	// gameloop
 
+	int maxScore = day05readBestScore();
+
 	bool goout = false;
 	newRandomFruit(board, boardDimX, boardDimY);
 	while (!goout)
@@ -184,7 +225,7 @@ void day05()
 		printStatusBar(curScore);
 		render(board, boardDimX, boardDimY,framebuffer);
 		theSnake.render(0, 0,framebuffer);
-		bitblit(boardDimX, boardDimY, 0, 1, framebuffer);
+		bitblit(boardDimX, boardDimY, 0, 3, framebuffer);
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
@@ -222,6 +263,12 @@ void day05()
 		}
 	}
 
-	consoleGotoxy(0, boardDimY + 1);
+	consoleGotoxy(0, boardDimY + 3);
 	std::wcout << "Game over!" << std::endl;
+
+	if (curScore > maxScore)
+	{
+		std::wcout << "You've got a new high score!" << std::endl;
+		day05writeNewScore(curScore);
+	}
 }
