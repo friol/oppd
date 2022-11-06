@@ -47,12 +47,12 @@ public:
 		return true;
 	}
 
-	void drawCard(int px, int py, wchar_t fb[][28])
+	void drawCard(int px, int py, wchar_t fb[][30],int posx,int posy)
 	{
 		wchar_t numbers[10] = { L'0',L'1',L'2',L'3',L'4',L'5',L'6',L'7',L'8',L'9' };
 
-		int fbpx = px * 7;
-		int fbpy = py * 4;
+		int fbpx = posx+(px * 7);
+		int fbpy = posy+(py * 4);
 
 		fb[fbpy][fbpx] = L'╔';
 		fb[fbpy][fbpx+1] = L'═';
@@ -88,7 +88,7 @@ public:
 		fb[fbpy + 3][fbpx + 6] = L'\\';
 	}
 
-	void drawEmptyCard(int px, int py, wchar_t fb[][28])
+	void drawEmptyCard(int px, int py, wchar_t fb[][30],int posx,int posy)
 	{
 		int fbpx = px * 7;
 		int fbpy = py * 4;
@@ -97,7 +97,7 @@ public:
 		{
 			for (int c = 0;c < 7;c++)
 			{
-				fb[fbpy+r][fbpx+c] = L' ';
+				fb[fbpy+r+posy][fbpx+c+posx] = L' ';
 			}
 		}
 	}
@@ -148,26 +148,26 @@ public:
 		}
 	}
 
-	void draw(wchar_t fb[][28])
+	void draw(wchar_t fb[][30],int posx,int posy)
 	{
 		for (int r = 0;r < 4;r++)
 		{
 			for (int c = 0;c < 4;c++)
 			{
-				if (this->board[r][c] != 16) this->drawCard(c, r, fb);
-				else this->drawEmptyCard(c, r, fb);
+				if (this->board[r][c] != 16) this->drawCard(c, r, fb,posx,posy);
+				else this->drawEmptyCard(c, r, fb,posx,posy);
 			}
 		}
 	}
 };
 
-void bitblit(int dimx, int dimy, int posx, int posy, wchar_t fb[][28])
+void bitblit(int dimx, int dimy, int posx, int posy, wchar_t fb[][30])
 {
 	for (int r = 0;r < dimy;r++)
 	{
 		consoleGotoxy(posx, posy + r);
-		wchar_t line[29];
-		line[28] = 0;
+		wchar_t line[31];
+		line[30] = 0;
 		for (int c = 0;c < dimx;c++)
 		{
 			line[c] = fb[r][c];
@@ -176,15 +176,29 @@ void bitblit(int dimx, int dimy, int posx, int posy, wchar_t fb[][28])
 	}
 }
 
+void drawFrame(wchar_t fb[][30],int fbdimx,int fbdimy)
+{
+	for (int r = 0;r < fbdimy;r++)
+	{
+		for (int c = 0;c < fbdimx;c++)
+		{
+			if ((r == 0) || (c == 0) || (r == fbdimy - 1) || (c == fbdimx - 1))
+			{
+				fb[r][c] = L'█';
+			}
+		}
+	}
+}
+
 // ╔════╗
-// ║ 01 ║
-// ╚════╝
-// \_____\|
+// ║ 01 ║\
+// ╚════╝ |
+//  \____\|
 
 void day06()
 {
-	const int fbdimx = 4 * 7;
-	const int fbdimy = 4 * 4;
+	const int fbdimx = 2+(4 * 7);
+	const int fbdimy = 2+(4 * 4);
 
 	setUnicodeConsole();
 	clearScreen();
@@ -207,7 +221,8 @@ void day06()
 	bool win = false;
 	while (!goout)
 	{
-		board.draw(framebuffer);
+		drawFrame(framebuffer,fbdimx,fbdimy);
+		board.draw(framebuffer,1,1);
 		bitblit(fbdimx, fbdimy, 0, 1, framebuffer);
 		consoleGotoxy(0, 0);
 		std::wcout << "Moves: " << moves;
