@@ -36,6 +36,7 @@ void resetConsole();
 COORD GetConsoleCursorPosition();
 void consoleGetDimensions(int& dimx, int& dimy);
 void consoleHideCursor();
+char consoleGetCharAt(int x, int y);
 
 void day01(int argc, char** argv);
 void day02();
@@ -43,5 +44,6 @@ void day03();
 void day04(int argc, char** argv);
 void day05();
 void day06();
+void day07();
 
 #endif

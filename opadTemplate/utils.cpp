@@ -84,3 +84,23 @@ void consoleHideCursor()
     info.bVisible = FALSE;
     SetConsoleCursorInfo(consoleHandle, &info);
 }
+
+char consoleGetCharAt(int x, int y)
+{
+    CHAR_INFO ci;
+    COORD xy = { 0, 0 };
+    SMALL_RECT rect = { x, y, x, y };
+    COORD coordBufSize;
+    COORD coordBufCoord;
+    coordBufSize.Y = 1;
+    coordBufSize.X = 1;
+    coordBufCoord.X = 0;
+    coordBufCoord.Y = 0;
+
+    int res = ReadConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), &ci, coordBufSize, coordBufCoord, &rect);
+    if (res)
+    {
+        return ci.Char.AsciiChar;
+    }
+    else return '\0';
+}
