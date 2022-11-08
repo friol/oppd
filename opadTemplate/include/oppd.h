@@ -5,6 +5,9 @@
 #include "json.hpp"
 using json = nlohmann::json;
 
+#include <winsock2.h>
+#include <Ws2tcpip.h>
+
 #include <atlbase.h>
 #include <wbemidl.h>
 #pragma comment(lib, "wbemuuid.lib")
@@ -45,5 +48,6 @@ void day04(int argc, char** argv);
 void day05();
 void day06();
 void day07();
+void day08(int argc, char** argv);
 
 #endif

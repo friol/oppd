@@ -10,15 +10,14 @@
 
 int main(int argc,char** argv)
 {
-    clearScreen();
-
     //day01(argc,argv);
     //day02();
     //day03();
     //day04(argc, argv);
     //day05();
     //day06();
-    day07();
+    //day07();
+    day08(argc, argv);
 
 	return 0;
 }
