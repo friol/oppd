@@ -40,6 +40,8 @@ bool getGeolocation(std::string ipaddr, float& latitude, float& longitude)
     std::string geoloc = res->body;
     json jgl= json::parse(geoloc);
 
+    std::cout << "Location identified as " << jgl["city"] << "," << jgl["country_name"] << std::endl;
+
     std::string la = jgl["latitude"];
     std::string lo = jgl["longitude"];
 
@@ -155,9 +157,8 @@ std::string weathercodeToString(int code)
     }
     else
     {
-        res = "Unknown weathercode, sorry";
+        res = "Unknown weathercode, I'm sorry";
     }
-
 
     return res;
 }
@@ -175,6 +176,12 @@ void day08(int argc, char** argv)
     {
         latitude = atof(argv[1]);
         longitude = atof(argv[2]);
+        //std::cout << "Entered coordinates: " << latitude << " " << longitude << std::endl;
+        if ((latitude == 0) || (longitude == 0))
+        {
+            std::cout << "Error: please enter valid latitude and longitude coordinates" << std::endl;
+            return;
+        }
         coordinatesInInput = true;
     }
     else if ((argc > 3) || (argc != 1))
@@ -216,5 +223,6 @@ void day08(int argc, char** argv)
     }
 
     std::string weatherString = weathercodeToString(weathercode);
-    std::cout << "Weather forecast for tomorrow: average temperature " << tempTomorrow << " with " << numOfRainHours << " rain hours. The elder says: " << weatherString << "." << std::endl;
+    std::cout << "Weather forecast for tomorrow: average temperature " << tempTomorrow << " with " << numOfRainHours << " hours of rain." << std::endl;
+    std::cout << "The elder says : " << weatherString << "." << std::endl;
 }
