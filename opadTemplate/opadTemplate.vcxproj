@@ -146,6 +146,7 @@
     <ClCompile Include="day06.cpp" />
     <ClCompile Include="day07.cpp" />
     <ClCompile Include="day08.cpp" />
+    <ClCompile Include="day09.bis.cpp" />
     <ClCompile Include="day09.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
