@@ -45,8 +45,8 @@ bool getGeolocation(std::string ipaddr, float& latitude, float& longitude)
     std::string la = jgl["latitude"];
     std::string lo = jgl["longitude"];
 
-    latitude = atof(la.c_str());
-    longitude= atof(lo.c_str());
+    latitude = (float)atof(la.c_str());
+    longitude= (float)atof(lo.c_str());
 
     return true;
 }
@@ -174,8 +174,8 @@ void day08(int argc, char** argv)
     float latitude, longitude;
     if (argc == 3)
     {
-        latitude = atof(argv[1]);
-        longitude = atof(argv[2]);
+        latitude = (float)atof(argv[1]);
+        longitude = (float)atof(argv[2]);
         //std::cout << "Entered coordinates: " << latitude << " " << longitude << std::endl;
         if ((latitude == 0) || (longitude == 0))
         {

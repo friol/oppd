@@ -89,7 +89,7 @@ char consoleGetCharAt(int x, int y)
 {
     CHAR_INFO ci;
     COORD xy = { 0, 0 };
-    SMALL_RECT rect = { x, y, x, y };
+    SMALL_RECT rect = { (SHORT)x, (SHORT)y, (SHORT)x, (SHORT)y };
     COORD coordBufSize;
     COORD coordBufCoord;
     coordBufSize.Y = 1;
