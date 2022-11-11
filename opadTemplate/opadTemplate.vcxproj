@@ -116,7 +116,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>d:\prova\openssl-1.1.1q\openssl-1.1\x64\lib\;D:\prova\bass24\c\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>d:\prova\openssl-1.1.1q\openssl-1.1\x64\lib\;D:\prova\bass24\c\x64\</AdditionalLibraryDirectories>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);libcrypto.lib;libssl.lib;bass.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -150,6 +150,7 @@
     <ClCompile Include="day09.bis.cpp" />
     <ClCompile Include="day09.cpp" />
     <ClCompile Include="day10.cpp" />
+    <ClCompile Include="day11.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
