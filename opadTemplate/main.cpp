@@ -6,7 +6,6 @@
 //
 
 #include "include/oppd.h"
-#include "include/mazecell.h"
 
 int main(int argc,char** argv)
 {
