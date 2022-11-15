@@ -127,6 +127,8 @@ void printCalendarOfMonth(int curmonth, int year, int* marr, int thisDay)
         dw++;
         if (dw >= 7)
         {
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(hConsole, 7);
             std::cout << std::endl;
             dw = 0;
         }
@@ -195,8 +197,6 @@ void day15(int argc, char** argv)
     std::time_t time_temp = std::mktime(&time_in);
     struct tm firstDay;
     localtime_s(&firstDay, &time_temp);
-
-    //std::cout << "First day of week is " << firstDay.tm_wday << std::endl;
 
     int theMonthArray[MAXDAYPLACES];
     buildMonthArray(firstDay.tm_wday, theMonthArray,curmonth,curyear);
