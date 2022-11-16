@@ -88,7 +88,7 @@ void day16(int argc, char** argv)
 	clearScreen();
 	consoleGotoxy(0, 0);
 
-	std::cout << "Press a key to counter stop at " << targetMap[difficulty] << std::endl;
+	std::cout << "Press a key to stop the counter at " << targetMap[difficulty] << std::endl;
 
 	int cntr = 0;
 	while (!_kbhit())
