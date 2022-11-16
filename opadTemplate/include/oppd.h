@@ -57,5 +57,6 @@ void day12();
 void day13();
 void day14(int argc,char** argv);
 void day15(int argc,char** argv);
+void day16(int argc,char** argv);
 
 #endif
