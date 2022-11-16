@@ -26,6 +26,21 @@ void day16readBestScores(int& iscoreEasy, int& iscoreNormal, int& iscoreHard)
 	}
 }
 
+void day16saveScore(int scoreEasy, int scoreNormal, int scoreHard)
+{
+	std::ofstream scoreFile;
+	scoreFile.open("day16scores.txt", std::ios::out);
+	if (scoreFile.is_open())
+	{
+		std::string sscoreEasy = std::to_string(scoreEasy);
+		scoreFile << sscoreEasy << std::endl;
+		std::string sscoreNormal = std::to_string(scoreNormal);
+		scoreFile << sscoreNormal << std::endl;
+		std::string sscoreHard = std::to_string(scoreHard);
+		scoreFile << sscoreHard << std::endl;
+	}
+}
+
 void day16usage(char** argv)
 {
 	std::cout << "Usage:" << std::endl << argv[0] << " [easy|normal|hard]" << std::endl;
@@ -90,6 +105,9 @@ void day16(int argc, char** argv)
 	if (newscore < curscore)
 	{
 		std::cout << std::endl << "You've got a new highscore!" << std::endl;
+		if (difficulty == "easy") day16saveScore(newscore, scoreNormal, scoreHard);
+		if (difficulty == "normal") day16saveScore(scoreEasy, newscore, scoreHard);
+		if (difficulty == "hard") day16saveScore(scoreEasy, scoreNormal, newscore);
 	}
 
 	consoleGotoxy(0, 2);
