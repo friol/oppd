@@ -85,6 +85,15 @@ void consoleHideCursor()
     SetConsoleCursorInfo(consoleHandle, &info);
 }
 
+void consoleShowCursor()
+{
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = TRUE;
+    SetConsoleCursorInfo(consoleHandle, &info);
+}
+
 char consoleGetCharAt(int x, int y)
 {
     CHAR_INFO ci;

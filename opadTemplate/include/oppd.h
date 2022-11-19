@@ -38,6 +38,7 @@ void consolePrintReversedChar(char ch,int col);
 void resetConsole();
 COORD GetConsoleCursorPosition();
 void consoleGetDimensions(int& dimx, int& dimy);
+void consoleShowCursor();
 void consoleHideCursor();
 char consoleGetCharAt(int x, int y);
 
@@ -60,5 +61,6 @@ void day15(int argc,char** argv);
 void day16(int argc,char** argv);
 void day17();
 void day18(int argc, char** argv);
+void day19();
 
 #endif
