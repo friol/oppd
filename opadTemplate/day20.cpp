@@ -7,6 +7,28 @@
 
 #include "include/oppd.h"
 
+class powerpill
+{
+private:
+public:
+
+	int posx, posy;
+	bool eaten;
+
+	powerpill(int px, int py)
+	{
+		this->posx = px;
+		this->posy = py;
+		this->eaten = false;
+	}
+
+	void draw(int x, int y)
+	{
+		consoleGotoxy(this->posx + x, this->posy + y);
+		std::wcout << L"*";
+	}
+};
+
 class robot
 {
 private:
@@ -54,12 +76,43 @@ public:
 		}
 	}
 
-	/*void teleport(int pfx, int pfy, std::vector<killer>& listOfKillers, std::vector<powerpill>& listOfPowerpills)
+	void teleport(int pfx, int pfy, std::vector<std::vector<int>>& listOfKillers, std::vector<powerpill>& listOfPowerpills,int x,int y)
 	{
-		consoleGotoxy(this->posx, this->posy);
+		consoleGotoxy(this->posx+x, this->posy+y);
 		std::wcout << L" ";
 
-	}*/
+		bool safelyLanded = true;
+		do
+		{
+			int npx = 1+rand() % (pfx - 2);
+			int npy = 1+rand() % (pfy - 2);
+
+			for (powerpill& pp : listOfPowerpills)
+			{
+				if (!pp.eaten)
+				{
+					if ((pp.posx == npx) && (pp.posy == npy))
+					{
+						safelyLanded = false;
+					}
+				}
+			}
+
+			for (std::vector<int>& kk : listOfKillers)
+			{
+				if ((kk[0] == npx) && (kk[1] == npy))
+				{
+					safelyLanded = false;
+				}
+			}
+
+			if (safelyLanded)
+			{
+				this->posx = npx;
+				this->posy = npy;
+			}
+		} while (!safelyLanded);
+	}
 };
 
 class killer
@@ -114,27 +167,6 @@ void drawPlayfield(int dimx, int dimy,int px,int py)
 	}
 }
 
-class powerpill
-{
-private:
-public:
-
-	int posx, posy;
-	bool eaten;
-
-	powerpill(int px, int py)
-	{
-		this->posx = px;
-		this->posy = py;
-		this->eaten = false;
-	}
-
-	void draw(int x,int y)
-	{
-		consoleGotoxy(this->posx+x, this->posy+y);
-		std::wcout << L"*";
-	}
-};
 
 //
 //
@@ -203,7 +235,8 @@ void day20()
 	drawPlayfield(playfieldDimx, playfieldDimy,0,1);
 
 	bool goout = false;
-	while (!goout)
+	bool winCondition = false;
+	while ((!goout)&&(!winCondition))
 	{
 		int nppeaten = 0;
 		for (powerpill& pp : listOfPowerpills)
@@ -212,7 +245,7 @@ void day20()
 		}
 
 		consoleGotoxy(0, 0);
-		std::wcout << " Fugue&Teleports - Remaining Teleports: " << numberOfTeleports << "             Number of pills eaten: " << nppeaten;
+		std::wcout << " Fugue&Teleports - Remaining Teleports: " << numberOfTeleports << "          Number of pills remaining: " << (numberOfPowerpills-nppeaten);
 		for (powerpill& pp : listOfPowerpills)
 		{
 			if (!pp.eaten) pp.draw(0,1);
@@ -257,6 +290,15 @@ void day20()
 			{
 				if (numberOfTeleports > 0)
 				{
+					std::vector<std::vector<int>> lofKillers;
+					for (killer& kk : listOfKillers)
+					{
+						std::vector<int> posk;
+						posk.push_back(kk.posx);
+						posk.push_back(kk.posy);
+					}
+
+					player.teleport(playfieldDimx, playfieldDimy, lofKillers, listOfPowerpills,0,1);
 
 					numberOfTeleports--;
 				}
@@ -280,7 +322,7 @@ void day20()
 					}
 				}
 
-				// check for powerpill
+				// check for powerpill eaten
 				for (powerpill& pp : listOfPowerpills)
 				{
 					if ((player.posx == pp.posx) && (player.posy == pp.posy))
@@ -288,8 +330,29 @@ void day20()
 						pp.eaten = true;
 					}
 				}
+
+				// check for win condition
+				winCondition = true;
+				for (powerpill& pp : listOfPowerpills)
+				{
+					if (!pp.eaten) winCondition = false;
+				}
 			}
 		}
+	}
+
+	if (winCondition)
+	{
+		int nppeaten = 0;
+		for (powerpill& pp : listOfPowerpills)
+		{
+			if (pp.eaten) nppeaten++;
+		}
+		consoleGotoxy(0, 0);
+		std::wcout << " Fugue&Teleports - Remaining Teleports: " << numberOfTeleports << "          Number of pills remaining: " << (numberOfPowerpills - nppeaten);
+		player.draw(0, 1);
+		consoleGotoxy(0, playfieldDimy + 1);
+		std::wcout << "Robots WIN!";
 	}
 
 	consoleGotoxy(0, playfieldDimy + 2);
