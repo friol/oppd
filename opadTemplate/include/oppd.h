@@ -63,5 +63,6 @@ void day17();
 void day18(int argc, char** argv);
 void day19();
 void day20();
+void day21();
 
 #endif
