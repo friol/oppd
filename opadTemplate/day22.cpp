@@ -1,15 +1,14 @@
 //
-// oppd
+// this oppd program will be transmitted in morse code
 // day22
-// friol
-// 2k22
+// friol 2k22
 //
 
 #include "include/oppd.h"
 
 bool hasAllowedChars(std::string sentence)
 {
-	std::string allowedChars = "abcdefghijklmnopqrstuvwxyz0123456789";
+	std::string allowedChars = "abcdefghijklmnopqrstuvwxyz0123456789 ";
 	for (char& c : sentence)
 	{
 		bool found = false;
@@ -26,7 +25,68 @@ bool hasAllowedChars(std::string sentence)
 
 std::string morseEncode(std::string sentence)
 {
+	std::string morseCodes[] = {
+		".-", // a
+		".---",
+		"-.-.",
+		"-..",
+		".",
+		"..-.",
+		"--.",
+		"....",
+		"..",
+		".---",
+		"-.-",
+		".-..",
+		"--",
+		"-.",
+		"---",
+		".--.",
+		"--.-",
+		".-.",
+		"...",
+		"-",
+		"..-",
+		"...-",
+		".--",
+		"-..-",
+		"-.--",
+		"--..",// z
+		"-----", // 0
+		".----",
+		"..---",
+		"...--",
+		"....-",
+		".....",
+		"-....",
+		"--...",
+		"---..",
+		"----." // 9
+	};
 
+	std::string encodedString = "";
+	std::string charsArray = "abcdefghijklmnopqrstuvwxyz0123456789";
+	for (char& c : sentence)
+	{
+		if (c == ' ')
+		{
+			encodedString += "  ";
+		}
+		else
+		{
+			int pos = 0;
+			for (char& ac : charsArray)
+			{
+				if (ac == c)
+				{
+					encodedString += morseCodes[pos] + " ";
+				}
+				pos++;
+			}
+		}
+	}
+
+	return encodedString;
 }
 
 void day22()
@@ -36,8 +96,8 @@ void day22()
 	{
 		std::string sentence;
 
-		std::cout << "Enter sentence to encode:" << std::endl << ">";
-		std::cin >> sentence;
+		std::cout << std::endl << "Enter sentence to encode:" << std::endl << ">";
+		std::getline(std::cin, sentence);
 
 		if ((sentence == "quit") || (sentence == "exit"))
 		{
@@ -59,6 +119,7 @@ void day22()
 				else
 				{
 					std::string encodedString = morseEncode(sentence);
+					std::cout << "String in morse code is: " << encodedString << std::endl;
 				}
 			}
 		}
