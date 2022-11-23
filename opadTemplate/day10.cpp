@@ -61,7 +61,7 @@ void day10(int argc, char** argv)
 
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 	float delta = (float)std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
-	float numOfTestsNormalized = (float)((float)numberOfTests) / 4096.0;
+	float numOfTestsNormalized = (float)(((float)numberOfTests) / 4096.0);
 
 	std::cout << "Milliseconds elapsed: " << delta << std::endl;
 	std::cout << "This computer oppd index is " << (delta / 229.0)/numOfTestsNormalized << " (higher than 1: better)" << std::endl;

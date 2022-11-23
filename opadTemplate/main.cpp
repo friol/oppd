@@ -31,7 +31,8 @@ int main(int argc,char** argv)
     //day19();
     //day20();
     //day21();
-    day22();
+    //day22();
+    day23();
 
 	return 0;
 }

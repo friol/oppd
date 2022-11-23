@@ -162,6 +162,7 @@
     <ClCompile Include="day20.cpp" />
     <ClCompile Include="day21.cpp" />
     <ClCompile Include="day22.cpp" />
+    <ClCompile Include="day23.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
