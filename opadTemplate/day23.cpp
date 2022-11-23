@@ -29,7 +29,7 @@ void day23()
 	std::string author = quote[0]["a"];
 	trim(sentence);
 
-	std::cout << sentence << std::endl;
+	std::cout << sentence << std::endl << std::endl;
 
 
 	// propose 3 random authors from storage
@@ -67,25 +67,30 @@ void day23()
 	std::cout << "2) " << choices[1] << std::endl;
 	std::cout << "3) " << choices[2] << std::endl;
 
-	std::string answer;
-	std::cout << ">";
-	std::getline(std::cin, answer);
-
-	if ((answer != "1") && (answer != "2") && (answer != "3"))
+	bool validAnswer = false;
+	while (!validAnswer)
 	{
-		std::cout << "Please answer with 1, 2 or 3." << std::endl;
-	}
-	else
-	{
-		int ianswer = stoi(answer);
+		std::string answer;
+		std::cout << ">";
+		std::getline(std::cin, answer);
 
-		if (choices[ianswer-1] == author)
+		if ((answer != "1") && (answer != "2") && (answer != "3"))
 		{
-			std::cout << "That's correct!" << std::endl;
+			std::cout << "Please answer with 1, 2 or 3." << std::endl;
 		}
 		else
 		{
-			std::cout << "No, the original author was " << author << std::endl;
+			validAnswer = true;
+			int ianswer = stoi(answer);
+
+			if (choices[ianswer - 1] == author)
+			{
+				std::cout << "That's correct!" << std::endl;
+			}
+			else
+			{
+				std::cout << "No, the original author was " << author << std::endl;
+			}
 		}
 	}
 }
