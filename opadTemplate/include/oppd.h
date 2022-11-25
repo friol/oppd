@@ -67,5 +67,6 @@ void day21();
 void day22();
 void day23();
 void day24();
+void day25();
 
 #endif
