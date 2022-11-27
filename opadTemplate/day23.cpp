@@ -60,7 +60,11 @@ void day23()
 	choices.push_back(listOfAuthors[rand1]);
 	choices.push_back(listOfAuthors[rand2]);
 	choices.push_back(author);
-	std::random_shuffle(std::begin(choices), std::end(choices));
+
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::shuffle(std::begin(choices), std::end(choices), g);
+	//std::random_shuffle(std::begin(choices), std::end(choices));
 
 	std::cout << "Who is the author of the sentence?" << std::endl;
 	std::cout << "1) " << choices[0] << std::endl;

@@ -112,6 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,6 +167,7 @@
     <ClCompile Include="day24.cpp" />
     <ClCompile Include="day25.cpp" />
     <ClCompile Include="day26.cpp" />
+    <ClCompile Include="day27.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>

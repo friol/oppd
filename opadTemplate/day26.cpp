@@ -19,7 +19,7 @@ std::string pickRandomVerse(int songNum, json& theLyrics)
 	while (end != std::string::npos)
 	{
 		verseArr.push_back(song.substr(start, end - start));
-		start = end + delim.length();
+		start = (unsigned int)(end + delim.length());
 		end = song.find(delim, start);
 	}
 
@@ -64,7 +64,7 @@ void day26()
 
 	srand((unsigned int)time(NULL));
 
-	int numSongs=theLyrics["lyricsarr"].size();
+	int numSongs=(int)theLyrics["lyricsarr"].size();
 
 	int verse = 0;
 	int songLen = 10;

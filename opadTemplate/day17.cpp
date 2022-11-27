@@ -4,6 +4,7 @@
 // friol 2o22
 //
 
+#include <random>
 #include "include/oppd.h"
 
 class numberStatus
@@ -43,7 +44,9 @@ public:
 			allNumbers.push_back(i);
 		}
 
-		random_shuffle(std::begin(allNumbers), std::end(allNumbers));
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::shuffle(std::begin(allNumbers), std::end(allNumbers),g);
 
 		std::vector<int> fifteenNumbers;
 		for (int i = 0;i < 15;i++)
@@ -348,7 +351,10 @@ void day17()
 	{
 		backpack.push_back(n);
 	}
-	random_shuffle(std::begin(backpack), std::end(backpack));
+
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::shuffle(std::begin(backpack), std::end(backpack),g);
 
 	int bppos = 0;
 	int winStatus = 0; // 0=nothing,1=ambo,etc.
