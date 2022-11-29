@@ -53,11 +53,11 @@ void drawCircle()
 
 		for (int c = paddingLeft;c <= (paddingLeft + circleDiameter);c++)
 		{
-			float dx = c - (paddingLeft + circleDiameter / 2);
-			float dy = r - (circleDiameter / 2);
-			float dist = sqrtf((dx * dx) + (dy * dy));
+			float dx = (float)(c - (paddingLeft + circleDiameter / 2));
+			float dy = (float)(r - (circleDiameter / 2));
+			float dist = (float)sqrtf((dx * dx) + (dy * dy));
 
-			float delta = 1.11;
+			float delta = 1.11f;
 			if ( (dist < ((circleDiameter / 2)+delta)) && (dist >= ((circleDiameter / 2))) )
 			{
 				std::wcout << L"█";
